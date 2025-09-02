@@ -15,13 +15,14 @@ const embedButton = document.getElementById('embed-button') as HTMLButtonElement
 const outputContainer = document.getElementById('output-container') as HTMLDivElement;
 const outputElement = document.getElementById('output') as HTMLPreElement;
 const saveButton = document.getElementById('save-button') as HTMLButtonElement;
+const downloadButton = document.getElementById('download-button') as HTMLButtonElement;
 const comparisonContainer = document.getElementById('comparison-container') as HTMLDivElement;
 const storedFileNameElement = document.getElementById('stored-file-name') as HTMLSpanElement;
 const compareButton = document.getElementById('compare-button') as HTMLButtonElement;
 const similarityScoreElement = document.getElementById('similarity-score') as HTMLParagraphElement;
 
 // Ensure all required elements are found
-if (!fileInput || !embedButton || !outputContainer || !outputElement || !saveButton || !comparisonContainer || !storedFileNameElement || !compareButton || !similarityScoreElement) {
+if (!fileInput || !embedButton || !outputContainer || !outputElement || !saveButton || !downloadButton || !comparisonContainer || !storedFileNameElement || !compareButton || !similarityScoreElement) {
   throw new Error('Required DOM elements are missing.');
 }
 
@@ -104,6 +105,7 @@ function resetCurrentOutput() {
     outputContainer.style.display = 'none';
     outputElement.textContent = '';
     saveButton.style.display = 'none';
+    downloadButton.style.display = 'none';
     similarityScoreElement.textContent = '';
     updateCompareButtonState();
 }
@@ -170,6 +172,7 @@ async function handleEmbed() {
     outputElement.textContent = `Embedding for "${file.name}" successful!\n\n`;
     outputElement.textContent += JSON.stringify(embeddingValues, null, 2);
     saveButton.style.display = 'block';
+    downloadButton.style.display = 'block';
     updateCompareButtonState();
 
   } catch (error) {
@@ -197,11 +200,34 @@ function handleCompare() {
     }
 }
 
+/** Handles downloading the current embedding as a JSON file. */
+function handleDownload() {
+    if (!currentEmbedding) {
+        alert('No current embedding to download.');
+        return;
+    }
+
+    const dataStr = JSON.stringify(currentEmbedding, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `embedding-${currentEmbedding.fileName}.json`;
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
 // --- Attach Event Listeners ---
 document.addEventListener('DOMContentLoaded', loadStoredEmbedding);
 embedButton.addEventListener('click', handleEmbed);
 saveButton.addEventListener('click', saveEmbeddingForComparison);
 compareButton.addEventListener('click', handleCompare);
+downloadButton.addEventListener('click', handleDownload);
 fileInput.addEventListener('change', () => {
     if (fileInput.files?.length) {
         resetCurrentOutput();

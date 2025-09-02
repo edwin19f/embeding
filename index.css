@@ -37,11 +37,52 @@ p {
     margin-bottom: 1.5rem;
 }
 
+.example-files {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.example-files h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #3c4043;
+    font-weight: 500;
+}
+
+.example-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.example-links a {
+    background-color: #e8f0fe;
+    color: #1967d2;
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.example-links a:hover {
+    background-color: #d2e3fc;
+    border-color: #1967d2;
+}
+
 .controls {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
 }
 
 input[type='file'] {
@@ -97,6 +138,11 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.result-actions {
+    display: flex;
+    gap: 0.5rem;
 }
 
 #output {

@@ -15,6 +15,15 @@
     <main>
       <h1>Text Embedding & Comparison</h1>
       <p>Select a text file to calculate its embedding and compare it with a stored embedding.</p>
+
+      <div class="example-files">
+        <h3>Or, try one of these examples:</h3>
+        <div class="example-links">
+            <a href="data:text/plain;charset=utf-8,Cats%20are%20small%2C%20carnivorous%20mammals.%20They%20are%20often%20kept%20as%20house%20pets.%20Domestic%20cats%20are%20valued%20by%20humans%20for%20companionship%20and%20their%20ability%20to%20hunt%20vermin." download="cat.txt">cat.txt</a>
+            <a href="data:text/plain;charset=utf-8,The%20dog%20is%20a%20domesticated%20descendant%20of%20the%20wolf.%20The%20dog%20is%20derived%20from%20an%20ancient%2C%20extinct%20wolf%2C%20and%20the%20modern%20wolf%20is%20the%20dog's%20nearest%20living%20relative." download="dog.txt">dog.txt</a>
+            <a href="data:text/plain;charset=utf-8,A%20car%20is%20a%20wheeled%20motor%20vehicle%20used%20for%20transportation.%20Most%20definitions%20of%20cars%20say%20that%20they%20run%20primarily%20on%20roads%2C%20seat%20one%20to%20eight%20people%2C%20and%20mainly%20transport%20people." download="car.txt">car.txt</a>
+        </div>
+      </div>
       
       <div class="controls">
         <input type="file" id="file-input" accept=".txt,.md,.html,.js,.ts,.css" aria-label="Select a text file" />
@@ -24,7 +33,10 @@
       <div id="output-container" style="display: none;">
         <div class="result-header">
             <h2>Current Embedding Result:</h2>
-            <button id="save-button" class="secondary-button" style="display: none;">Save for Comparison</button>
+            <div class="result-actions">
+              <button id="save-button" class="secondary-button" style="display: none;">Save for Comparison</button>
+              <button id="download-button" class="secondary-button" style="display: none;">Download .json</button>
+            </div>
         </div>
         <pre id="output" aria-live="polite"></pre>
       </div>
