@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Embedding with Gemini</title>
+    <link rel="stylesheet" href="index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@^0.7.0"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Text Embedding & Comparison</h1>
+      <p>Select a text file to calculate its embedding and compare it with a stored embedding.</p>
+      
+      <div class="controls">
+        <input type="file" id="file-input" accept=".txt,.md,.html,.js,.ts,.css" aria-label="Select a text file" />
+        <button id="embed-button">Embed Content</button>
+      </div>
+
+      <div id="output-container" style="display: none;">
+        <div class="result-header">
+            <h2>Current Embedding Result:</h2>
+            <button id="save-button" class="secondary-button" style="display: none;">Save for Comparison</button>
+        </div>
+        <pre id="output" aria-live="polite"></pre>
+      </div>
+
+      <div id="comparison-container" style="display: none;">
+        <h2>Stored Embedding for Comparison</h2>
+        <div id="stored-embedding-details">
+            <p><strong>File:</strong> <span id="stored-file-name"></span></p>
+        </div>
+        <div class="comparison-controls">
+            <button id="compare-button" disabled>Compare with Stored</button>
+            <p id="similarity-score" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="index.tsx"></script>
+  </body>
+</html>

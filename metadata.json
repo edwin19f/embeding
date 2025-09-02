@@ -1,0 +1,5 @@
+{
+  "name": "Embeddings",
+  "description": "Calculate text embeddings for use in RAG",
+  "requestFramePermissions": []
+}
